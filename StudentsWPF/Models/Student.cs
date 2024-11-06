@@ -9,6 +9,7 @@ namespace StudentsWPF.Models
         private string firstName;
         private string secondName;
         private string lastName;
+        private double averageGrade;
         public List<Grade> Grades { get; set; } =
             new List<Grade>();
 
@@ -37,6 +38,23 @@ namespace StudentsWPF.Models
             {
                 lastName = value;
                 OnPropertyChanged("LastName");
+            }
+        }
+        public double AverageGrade
+        {
+            get
+            {
+                double sum = 0;
+                foreach (var grade in Grades)
+                {
+                    sum += grade.Value;
+                }
+                return sum/Grades.Count;
+            }
+            set
+            {
+                averageGrade = value;
+                OnPropertyChanged("AverageGrade");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

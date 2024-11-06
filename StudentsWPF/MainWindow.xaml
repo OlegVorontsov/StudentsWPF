@@ -73,7 +73,7 @@
             <TextBox Text="{Binding SecondName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Отчество" />
             <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Text="Успеваемость" />
+            <TextBlock Text="Оценки по предметам" />
             <ListBox ItemsSource="{Binding Grades}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -84,6 +84,8 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <TextBlock Text="Средняя оценка" />
+            <TextBox Text="{Binding AverageGrade}" />
         </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedSubject}" VerticalAlignment="Bottom">
