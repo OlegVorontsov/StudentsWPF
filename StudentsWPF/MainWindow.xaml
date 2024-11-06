@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentsWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
@@ -32,6 +32,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Margin="0,393,0,0">
+            <Button Command="{Binding AddCommand}" Margin="10, 10, 10, 10" Content="Добавить студента" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        </StackPanel>
 
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedStudent}">
             <TextBlock Text="Выбранный студент"  />
