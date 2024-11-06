@@ -9,7 +9,8 @@ namespace StudentsWPF.Models
         private string firstName;
         private string secondName;
         private string lastName;
-        private List<Grade> Grades { get; set; }
+        public List<Grade> Grades { get; set; } =
+            new List<Grade>();
 
         public string FirstName
         {

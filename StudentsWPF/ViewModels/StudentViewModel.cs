@@ -72,13 +72,13 @@ namespace StudentsWPF.ViewModels
         }
 
         // команда добавления нового студента
-        private RelayCommand addCommand;
-        public RelayCommand AddCommand
+        private RelayCommand addStudentCommand;
+        public RelayCommand AddStudentCommand
         {
             get
             {
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
+                return addStudentCommand ??
+                  (addStudentCommand = new RelayCommand(obj =>
                   {
                       Student student = new Student();
                       Students.Insert(0, student);
@@ -87,13 +87,13 @@ namespace StudentsWPF.ViewModels
             }
         }
         // команда удаления студента
-        private RelayCommand removeCommand;
-        public RelayCommand RemoveCommand
+        private RelayCommand removeStudentCommand;
+        public RelayCommand RemoveStudentCommand
         {
             get
             {
-                return removeCommand ??
-                  (removeCommand = new RelayCommand(obj =>
+                return removeStudentCommand ??
+                  (removeStudentCommand = new RelayCommand(obj =>
                   {
                       Student student = obj as Student;
                       if (student != null)
@@ -102,6 +102,40 @@ namespace StudentsWPF.ViewModels
                       }
                   },
                  (obj) => Students.Count > 0));
+            }
+        }
+
+        // команда добавления нового предмета
+        private RelayCommand addSubjectCommand;
+        public RelayCommand AddSubjectCommand
+        {
+            get
+            {
+                return addSubjectCommand ??
+                  (addSubjectCommand = new RelayCommand(obj =>
+                  {
+                      Subject subject = new Subject();
+                      Subjects.Insert(0, subject);
+                      SelectedSubject = subject;
+                  }));
+            }
+        }
+        // команда удаления предмета
+        private RelayCommand removeSubjectCommand;
+        public RelayCommand RemoveSubjectCommand
+        {
+            get
+            {
+                return removeSubjectCommand ??
+                  (removeSubjectCommand = new RelayCommand(obj =>
+                  {
+                      Subject subject = obj as Subject;
+                      if (subject != null)
+                      {
+                          Subjects.Remove(subject);
+                      }
+                  },
+                 (obj) => Subjects.Count > 0));
             }
         }
 
@@ -132,20 +166,33 @@ namespace StudentsWPF.ViewModels
             // студенты по умолчанию
             Students = new ObservableCollection<Student>
             {
-                new Student { FirstName = "Ivanov", SecondName = "Ivan", LastName = "Ivanovich" },
-                new Student { FirstName = "Petrov", SecondName = "Petr", LastName = "Petrovich" },
-                new Student { FirstName = "Sidorov", SecondName = "Aleksandr", LastName = "Aleksandrovich" },
-                new Student { FirstName = "Harisova", SecondName = "Kseniya", LastName = "Petrova" }
+                new Student { Id = 1, FirstName = "Ivanov", SecondName = "Ivan", LastName = "Ivanovich" },
+                new Student { Id = 2, FirstName = "Petrov", SecondName = "Petr", LastName = "Petrovich" },
+                new Student { Id = 3, FirstName = "Sidorov", SecondName = "Aleksandr", LastName = "Aleksandrovich" },
+                new Student { Id = 4, FirstName = "Harisova", SecondName = "Kseniya", LastName = "Petrova" }
             };
 
             // предметы по умолчанию
             Subjects = new ObservableCollection<Subject>
             {
-                new Subject { Name = "Math", Description = "Math description" },
-                new Subject { Name = "Biology", Description = "Biology description" },
-                new Subject { Name = "Philosophy", Description = "Philosophy description" },
-                new Subject { Name = "Geometry", Description = "Geometry description" }
+                new Subject { Id = 1, Name = "Math", Description = "Math description" },
+                new Subject { Id = 2, Name = "Biology", Description = "Biology description" },
+                new Subject { Id = 3, Name = "Philosophy", Description = "Philosophy description" },
+                new Subject { Id = 4, Name = "Geometry", Description = "Geometry description" }
             };
+
+            // оценки по умолчанию
+            Students.First(s => s.Id == 1).Grades.Add(new Grade { Id = 1, StudentId = 1, SubjectId = 1, Value = 5 });
+            Students.First(s => s.Id == 1).Grades.Add(new Grade { Id = 2, StudentId = 1, SubjectId = 2, Value = 3 });
+
+            Students.First(s => s.Id == 2).Grades.Add(new Grade { Id = 3, StudentId = 2, SubjectId = 3, Value = 4 });
+            Students.First(s => s.Id == 2).Grades.Add(new Grade { Id = 4, StudentId = 2, SubjectId = 4, Value = 4 });
+
+            Students.First(s => s.Id == 3).Grades.Add(new Grade { Id = 5, StudentId = 3, SubjectId = 1, Value = 3 });
+            Students.First(s => s.Id == 3).Grades.Add(new Grade { Id = 6, StudentId = 3, SubjectId = 4, Value = 2 });
+
+            Students.First(s => s.Id == 4).Grades.Add(new Grade { Id = 7, StudentId = 4, SubjectId = 2, Value = 5 });
+            Students.First(s => s.Id == 4).Grades.Add(new Grade { Id = 8, StudentId = 4, SubjectId = 3, Value = 5 });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

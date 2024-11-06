@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentsWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="500" Width="850">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
@@ -20,16 +20,16 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.8*" />
-            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="*" />
             <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
-        <Menu Grid.ColumnSpan="2" >
+        <Menu Grid.ColumnSpan="3" >
             <MenuItem Header="Файл">
                 <MenuItem Header="Открыть" Command="{Binding OpenCommand}" />
                 <MenuItem Header="Сохранить" Command="{Binding SaveCommand}" />
@@ -48,14 +48,15 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Command="{Binding AddCommand}"
+            <Button Command="{Binding AddStudentCommand}"
                     Margin="10, 10, 10, 10"
                     Content="Добавить студента"
                     Width="120"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"/>
-            <Button Command="{Binding RemoveCommand}"
+            <Button Command="{Binding RemoveStudentCommand}"
                     Margin="10, 0, 10, 10"
                     Width="120"
                     CommandParameter="{Binding SelectedStudent}"
@@ -72,6 +73,25 @@
             <TextBox Text="{Binding SecondName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Отчество" />
             <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Успеваемость" />
+            <ListBox ItemsSource="{Binding Grades}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock FontSize="18" Text="{Binding Path=SubjectId}" />
+                            <TextBlock Text="{Binding Path=Value}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedSubject}" VerticalAlignment="Bottom">
+            <TextBlock Text="Выбранный предмет"  />
+            <TextBlock Text="Название" />
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Описание" />
+            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Subjects}"
@@ -85,5 +105,20 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+            <Button Command="{Binding AddSubjectCommand}"
+                    Margin="10, 10, 10, 10"
+                    Content="Добавить предмет"
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"/>
+            <Button Command="{Binding RemoveSubjectCommand}"
+                    Margin="10, 0, 10, 10"
+                    Width="120"
+                    CommandParameter="{Binding SelectedSubject}"
+                    Content="Удалить предмет"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"/>
+        </StackPanel>
     </Grid>
 </Window>
