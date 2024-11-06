@@ -5,9 +5,11 @@ namespace StudentsWPF.Models
 {
     public class Student : INotifyPropertyChanged
     {
+        public int Id { get; set; }
         private string firstName;
         private string secondName;
         private string lastName;
+        private List<Grade> Grades { get; set; }
 
         public string FirstName
         {

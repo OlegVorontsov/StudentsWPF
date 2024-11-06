@@ -22,6 +22,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -48,8 +49,19 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Command="{Binding AddCommand}" Margin="10, 10, 10, 10" Content="Добавить студента" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <Button Command="{Binding RemoveCommand}" Margin="10, 0, 10, 10" Width="120" CommandParameter="{Binding SelectedStudent}" Content="Удалить студента" HorizontalAlignment="Left"/>
+            <Button Command="{Binding AddCommand}"
+                    Margin="10, 10, 10, 10"
+                    Content="Добавить студента"
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"/>
+            <Button Command="{Binding RemoveCommand}"
+                    Margin="10, 0, 10, 10"
+                    Width="120"
+                    CommandParameter="{Binding SelectedStudent}"
+                    Content="Удалить студента"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedStudent}">
@@ -61,5 +73,17 @@
             <TextBlock Text="Отчество" />
             <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
+
+        <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Subjects}"
+                 SelectedItem="{Binding SelectedSubject}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Description}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

@@ -10,11 +10,13 @@ namespace StudentsWPF.ViewModels
     public class StudentViewModel : INotifyPropertyChanged
     {
         private Student selectedStudent;
+        private Subject selectedSubject;
 
         IFileService fileService;
         IDialogService dialogService;
 
         public ObservableCollection<Student> Students { get; set; }
+        public ObservableCollection<Subject> Subjects { get; set; }
 
         // команда сохранения файла
         private RelayCommand saveCommand;
@@ -112,6 +114,15 @@ namespace StudentsWPF.ViewModels
                 OnPropertyChanged("SelectedStudent");
             }
         }
+        public Subject SelectedSubject
+        {
+            get { return selectedSubject; }
+            set
+            {
+                selectedSubject = value;
+                OnPropertyChanged("SelectedSubject");
+            }
+        }
 
         public StudentViewModel(IDialogService dialogService, IFileService fileService)
         {
@@ -125,6 +136,15 @@ namespace StudentsWPF.ViewModels
                 new Student { FirstName = "Petrov", SecondName = "Petr", LastName = "Petrovich" },
                 new Student { FirstName = "Sidorov", SecondName = "Aleksandr", LastName = "Aleksandrovich" },
                 new Student { FirstName = "Harisova", SecondName = "Kseniya", LastName = "Petrova" }
+            };
+
+            // предметы по умолчанию
+            Subjects = new ObservableCollection<Subject>
+            {
+                new Subject { Name = "Math", Description = "Math description" },
+                new Subject { Name = "Biology", Description = "Biology description" },
+                new Subject { Name = "Philosophy", Description = "Philosophy description" },
+                new Subject { Name = "Geometry", Description = "Geometry description" }
             };
         }
 
