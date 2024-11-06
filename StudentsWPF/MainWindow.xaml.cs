@@ -1,4 +1,5 @@
-﻿using StudentsWPF.ViewModels;
+﻿using StudentsWPF.Services;
+using StudentsWPF.ViewModels;
 using System.Windows;
 
 namespace StudentsWPF
@@ -8,7 +9,8 @@ namespace StudentsWPF
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new StudentViewModel();
+            DataContext =
+                new StudentViewModel(new DialogService(), new JsonFileService());
         }
     }
 }

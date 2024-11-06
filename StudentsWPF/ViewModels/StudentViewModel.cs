@@ -1,4 +1,5 @@
 ﻿using StudentsWPF.Commands;
+using StudentsWPF.Interfaces;
 using StudentsWPF.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,7 +11,63 @@ namespace StudentsWPF.ViewModels
     {
         private Student selectedStudent;
 
+        IFileService fileService;
+        IDialogService dialogService;
+
         public ObservableCollection<Student> Students { get; set; }
+
+        // команда сохранения файла
+        private RelayCommand saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ??
+                  (saveCommand = new RelayCommand(obj =>
+                  {
+                      try
+                      {
+                          if (dialogService.SaveFileDialog() == true)
+                          {
+                              fileService.Save(dialogService.FilePath, Students.ToList());
+                              dialogService.ShowMessage("Файл сохранен");
+                          }
+                      }
+                      catch (Exception ex)
+                      {
+                          dialogService.ShowMessage(ex.Message);
+                      }
+                  }));
+            }
+        }
+
+        // команда открытия файла
+        private RelayCommand openCommand;
+        public RelayCommand OpenCommand
+        {
+            get
+            {
+                return openCommand ??
+                  (openCommand = new RelayCommand(obj =>
+                  {
+                      try
+                      {
+                          if (dialogService.OpenFileDialog() == true)
+                          {
+                              var students = fileService.Open(dialogService.FilePath);
+                              Students.Clear();
+                              foreach (var p in students)
+                                  Students.Add(p);
+                              dialogService.ShowMessage("Файл открыт");
+                          }
+                      }
+                      catch (Exception ex)
+                      {
+                          dialogService.ShowMessage(ex.Message);
+                      }
+                  }));
+            }
+        }
 
         // команда добавления нового студента
         private RelayCommand addCommand;
@@ -27,6 +84,24 @@ namespace StudentsWPF.ViewModels
                   }));
             }
         }
+        // команда удаления студента
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommand(obj =>
+                  {
+                      Student student = obj as Student;
+                      if (student != null)
+                      {
+                          Students.Remove(student);
+                      }
+                  },
+                 (obj) => Students.Count > 0));
+            }
+        }
 
         public Student SelectedStudent
         {
@@ -38,8 +113,12 @@ namespace StudentsWPF.ViewModels
             }
         }
 
-        public StudentViewModel()
+        public StudentViewModel(IDialogService dialogService, IFileService fileService)
         {
+            this.dialogService = dialogService;
+            this.fileService = fileService;
+
+            // студенты по умолчанию
             Students = new ObservableCollection<Student>
             {
                 new Student { FirstName = "Ivanov", SecondName = "Ivan", LastName = "Ivanovich" },

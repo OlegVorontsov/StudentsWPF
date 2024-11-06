@@ -13,14 +13,29 @@
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2" >
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding OpenCommand}" />
+                <MenuItem Header="Сохранить" Command="{Binding SaveCommand}" />
+            </MenuItem>
+        </Menu>
 
-        <ListBox Grid.Column="0" ItemsSource="{Binding Students}"
+        <ListBox Grid.Row="1" ItemsSource="{Binding Students}"
                  SelectedItem="{Binding SelectedStudent}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -32,11 +47,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Margin="0,393,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Command="{Binding AddCommand}" Margin="10, 10, 10, 10" Content="Добавить студента" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Button Command="{Binding RemoveCommand}" Margin="10, 0, 10, 10" Width="120" CommandParameter="{Binding SelectedStudent}" Content="Удалить студента" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" DataContext="{Binding SelectedStudent}">
+        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedStudent}">
             <TextBlock Text="Выбранный студент"  />
             <TextBlock Text="Имя" />
             <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
