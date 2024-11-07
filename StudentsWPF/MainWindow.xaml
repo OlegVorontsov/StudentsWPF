@@ -84,6 +84,7 @@
                     VerticalAlignment="Bottom"/>
         </StackPanel>
 
+        <!-- Works with Json -->
         <StackPanel x:Name="selectedStudent" Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedStudent}">
             <TextBlock Text="Выбранный студент"  />
             <TextBlock Text="Имя" />
@@ -106,7 +107,8 @@
             <TextBlock Text="Средняя оценка" />
             <TextBox Text="{Binding AverageGrade}" />
         </StackPanel>
-        
+
+        <!-- Works with Json -->
         <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" DataContext="{Binding SelectedSubject}" VerticalAlignment="Bottom">
             <TextBlock Text="Выбранный предмет"  />
             <TextBlock Text="Название" />
