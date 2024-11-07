@@ -14,11 +14,12 @@ namespace StudentsWPF
         {
             InitializeComponent();
             // DataContext = new StudentViewModel(new DialogService(), new JsonFileService());
-            Loaded += MainWindow_Loaded;
+            Loaded += MainWindow_AtudentsLoad;
+            // DataContext = new StudentDbViewModel();
         }
 
         // при загрузке окна
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_AtudentsLoad(object sender, RoutedEventArgs e)
         {
             // гарантируем, что база данных создана
             // db.Database.EnsureCreated();

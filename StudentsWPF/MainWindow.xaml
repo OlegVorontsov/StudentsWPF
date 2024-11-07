@@ -107,7 +107,7 @@
             <TextBlock Text="Средняя оценка" />
             <TextBox Text="{Binding AverageGrade}" />
         </StackPanel>
-
+        
         <!-- Works with Json -->
         <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" DataContext="{Binding SelectedSubject}" VerticalAlignment="Bottom">
             <TextBlock Text="Выбранный предмет"  />
