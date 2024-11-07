@@ -35,7 +35,8 @@
                 <MenuItem Header="Сохранить" Command="{Binding SaveCommand}" />
             </MenuItem>
         </Menu>
-
+        
+        <!-- Database -->
         <ListBox Grid.Row="1" x:Name="studentsList" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -53,6 +54,7 @@
             <Button Content="Удалить" Margin="10" Click="Delete_Click"  />
         </StackPanel>
 
+        <!-- Json -->
         <!--<ListBox Grid.Row="1" ItemsSource="{Binding Students}"
                  SelectedItem="{Binding SelectedStudent}">
             <ListBox.ItemTemplate>
