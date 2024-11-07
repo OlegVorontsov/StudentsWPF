@@ -10,7 +10,6 @@ namespace StudentsWPF.Models
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
         private int number;
-        public Student? Student { get; set; }
         public int Number
         {
             get { return number; }

@@ -10,7 +10,6 @@ namespace StudentsWPF.Models
         private string secondName;
         private string lastName;
         private double averageGrade;
-        public List<Subject> Subjects { get; set; } = new();
         public List<Grade> Grades { get; set; } = new ();
 
         public string FirstName

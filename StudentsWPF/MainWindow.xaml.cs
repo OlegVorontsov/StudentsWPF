@@ -21,7 +21,7 @@ namespace StudentsWPF
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // гарантируем, что база данных создана
-            db.Database.EnsureCreated();
+            // db.Database.EnsureCreated();
             // загружаем данные из БД
             db.Students.ToList();
             // и устанавливаем данные в качестве контекста
