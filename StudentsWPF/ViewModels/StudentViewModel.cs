@@ -11,6 +11,7 @@ namespace StudentsWPF.ViewModels
     {
         private Student selectedStudent;
         private Subject selectedSubject;
+        private Grade selectedGrade;
 
         IFileService fileService;
         IDialogService dialogService;
@@ -157,6 +158,15 @@ namespace StudentsWPF.ViewModels
                 OnPropertyChanged("SelectedSubject");
             }
         }
+        public Grade SelectedGrade
+        {
+            get { return selectedGrade; }
+            set
+            {
+                selectedGrade = value;
+                OnPropertyChanged("SelectedGrade");
+            }
+        }
 
         public StudentViewModel(IDialogService dialogService, IFileService fileService)
         {
@@ -182,17 +192,65 @@ namespace StudentsWPF.ViewModels
             };
 
             // оценки по умолчанию
-            Students.First(s => s.Id == 1).Grades.Add(new Grade { Id = 1, StudentId = 1, SubjectId = 1, Value = 5 });
-            Students.First(s => s.Id == 1).Grades.Add(new Grade { Id = 2, StudentId = 1, SubjectId = 2, Value = 3 });
+            Students.First(s => s.Id == 1).Grades.Add(new Grade
+                {
+                    Id = 1,
+                    StudentId = 1,
+                    SubjectId = 1,
+                    Number = 5
+                });
+            Students.First(s => s.Id == 1).Grades.Add(new Grade
+                {
+                    Id = 2,
+                    StudentId = 1,
+                    SubjectId = 2,
+                    Number = 3
+                });
 
-            Students.First(s => s.Id == 2).Grades.Add(new Grade { Id = 3, StudentId = 2, SubjectId = 3, Value = 4 });
-            Students.First(s => s.Id == 2).Grades.Add(new Grade { Id = 4, StudentId = 2, SubjectId = 4, Value = 4 });
+            Students.First(s => s.Id == 2).Grades.Add(new Grade
+                {
+                    Id = 3,
+                    StudentId = 2,
+                    SubjectId = 3,
+                    Number = 4
+                });
+            Students.First(s => s.Id == 2).Grades.Add(new Grade
+                {
+                    Id = 4,
+                    StudentId = 2,
+                    SubjectId = 4,
+                    Number = 4
+                });
 
-            Students.First(s => s.Id == 3).Grades.Add(new Grade { Id = 5, StudentId = 3, SubjectId = 1, Value = 3 });
-            Students.First(s => s.Id == 3).Grades.Add(new Grade { Id = 6, StudentId = 3, SubjectId = 4, Value = 2 });
+            Students.First(s => s.Id == 3).Grades.Add(new Grade
+                {
+                    Id = 5,
+                    StudentId = 3,
+                    SubjectId = 1,
+                    Number = 3
+                });
+            Students.First(s => s.Id == 3).Grades.Add(new Grade
+                {
+                    Id = 6,
+                    StudentId = 3,
+                    SubjectId = 4,
+                    Number = 2
+                });
 
-            Students.First(s => s.Id == 4).Grades.Add(new Grade { Id = 7, StudentId = 4, SubjectId = 2, Value = 5 });
-            Students.First(s => s.Id == 4).Grades.Add(new Grade { Id = 8, StudentId = 4, SubjectId = 3, Value = 5 });
+            Students.First(s => s.Id == 4).Grades.Add(new Grade
+                {
+                    Id = 7,
+                    StudentId = 4,
+                    SubjectId = 2,
+                    Number = 5
+                });
+            Students.First(s => s.Id == 4).Grades.Add(new Grade
+                {
+                    Id = 8,
+                    StudentId = 4,
+                    SubjectId = 3,
+                    Number = 5
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

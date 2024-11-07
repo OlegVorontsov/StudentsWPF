@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentsWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="850">
+        Title="MainWindow" Height="600" Width="850">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
@@ -27,7 +27,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3" >
             <MenuItem Header="Файл">
@@ -36,7 +36,24 @@
             </MenuItem>
         </Menu>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Students}"
+        <ListBox Grid.Row="1" x:Name="studentsList" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding SecondName}" FontSize="16" />
+                        <TextBlock Text="{Binding FirstName}" FontSize="13" />
+                        <TextBlock Text="{Binding LastName}" FontSize="13" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Content="Добавить" Margin="10" Click="Add_Click" />
+            <Button Content="Изменить" Margin="10" Click="Edit_Click"  />
+            <Button Content="Удалить" Margin="10" Click="Delete_Click"  />
+        </StackPanel>
+
+        <!--<ListBox Grid.Row="1" ItemsSource="{Binding Students}"
                  SelectedItem="{Binding SelectedStudent}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -47,17 +64,17 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Command="{Binding AddStudentCommand}"
-                    Margin="10, 10, 10, 10"
+                    Margin="10"
                     Content="Добавить студента"
                     Width="120"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"/>
             <Button Command="{Binding RemoveStudentCommand}"
-                    Margin="10, 0, 10, 10"
+                    Margin="10"
                     Width="120"
                     CommandParameter="{Binding SelectedStudent}"
                     Content="Удалить студента"
@@ -65,7 +82,7 @@
                     VerticalAlignment="Bottom"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedStudent}">
+        <StackPanel x:Name="selectedStudent" Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedStudent}">
             <TextBlock Text="Выбранный студент"  />
             <TextBlock Text="Имя" />
             <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
@@ -74,12 +91,12 @@
             <TextBlock Text="Отчество" />
             <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Оценки по предметам" />
-            <ListBox ItemsSource="{Binding Grades}">
+            <ListBox ItemsSource="{Binding Grades}" Height="215">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="5">
+                        <StackPanel Margin="5" >
                             <TextBlock FontSize="18" Text="{Binding Path=SubjectId}" />
-                            <TextBlock Text="{Binding Path=Value}" />
+                            <TextBlock Text="{Binding Path=Number, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -88,7 +105,7 @@
             <TextBox Text="{Binding AverageGrade}" />
         </StackPanel>
         
-        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedSubject}" VerticalAlignment="Bottom">
+        <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" DataContext="{Binding SelectedSubject}" VerticalAlignment="Bottom">
             <TextBlock Text="Выбранный предмет"  />
             <TextBlock Text="Название" />
             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
@@ -109,13 +126,13 @@
         </ListBox>
         <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
             <Button Command="{Binding AddSubjectCommand}"
-                    Margin="10, 10, 10, 10"
+                    Margin="10"
                     Content="Добавить предмет"
                     Width="120"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"/>
             <Button Command="{Binding RemoveSubjectCommand}"
-                    Margin="10, 0, 10, 10"
+                    Margin="10"
                     Width="120"
                     CommandParameter="{Binding SelectedSubject}"
                     Content="Удалить предмет"

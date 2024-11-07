@@ -10,8 +10,8 @@ namespace StudentsWPF.Models
         private string secondName;
         private string lastName;
         private double averageGrade;
-        public List<Grade> Grades { get; set; } =
-            new List<Grade>();
+        public List<Subject> Subjects { get; set; } = new();
+        public List<Grade> Grades { get; set; } = new ();
 
         public string FirstName
         {
@@ -47,7 +47,7 @@ namespace StudentsWPF.Models
                 double sum = 0;
                 foreach (var grade in Grades)
                 {
-                    sum += grade.Value;
+                    sum += grade.Number;
                 }
                 return sum/Grades.Count;
             }

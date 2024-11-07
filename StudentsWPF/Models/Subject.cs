@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 
 namespace StudentsWPF.Models
 {
@@ -8,7 +7,8 @@ namespace StudentsWPF.Models
     {
         public int Id { get; set; }
         private string name;
-        private string description;
+        private string? description;
+        public List<Student> Students { get; set; } = new();
 
         public string Name
         {
